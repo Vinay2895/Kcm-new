@@ -38,7 +38,10 @@ pipeline {
                 bat 'mvn install'
             }
         }
-
+        stage ('deploy-to-tomcat') {
+           steps { deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'Tomcat', path: '', url: 'http://localhost:8080/')], contextPath: null, war: '**/*.war'
+                 }
+        }
     }
 }
 }
